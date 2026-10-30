@@ -17,5 +17,11 @@ Internet**), which is off by default.
 | `mcp-configs/cursor-mcp.json` | Cursor (`.cursor/mcp.json`) |
 | `mcp-configs/vscode-mcp.json` | VS Code (`.vscode/mcp.json`) |
 
+Windows blocks PowerShell scripts by default, so run the PowerShell example from the `http` folder with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\Customer-Query.ps1
+```
+
 Queries should be bounded (`MaxReturned`, a date range, or similar). LedgerCrossing refuses
 unbounded queries by default.
