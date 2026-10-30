@@ -1,6 +1,7 @@
 // List the first 10 customers from QuickBooks Desktop through LedgerCrossing (Node 18+).
 const LC_URL = process.env.LC_URL ?? "http://localhost:8284";
 const LC_KEY = process.env.LC_KEY; // API key from Settings > Allowed Connections
+if (!LC_KEY) throw new Error("Set LC_KEY to the API key from Settings > Allowed Connections");
 
 const qbxml =
   '<?xml version="1.0"?><?qbxml version="13.0"?>' +

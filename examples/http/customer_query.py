@@ -1,6 +1,7 @@
 """List the first 10 customers from QuickBooks Desktop through LedgerCrossing (standard library only)."""
 import json
 import os
+import urllib.error
 import urllib.request
 
 LC_URL = os.environ.get("LC_URL", "http://localhost:8284")
@@ -18,7 +19,10 @@ req = urllib.request.Request(
     data=json.dumps({"qbxml": QBXML}).encode(),
     headers={"X-Api-Key": LC_KEY, "Content-Type": "application/json"},
 )
-with urllib.request.urlopen(req) as resp:
-    result = json.load(resp)
+try:
+    with urllib.request.urlopen(req) as resp:
+        result = json.load(resp)
+except urllib.error.HTTPError as e:
+    result = json.load(e)
 
 print(result["response"] if result.get("success") else result)

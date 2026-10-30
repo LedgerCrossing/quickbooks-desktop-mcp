@@ -10,8 +10,8 @@ Claude, ChatGPT, Cursor, VS Code and any other MCP client get six tools covering
 operations. Your own code gets `POST /api/v1/qbxml`: send qbXML, get qbXML back. No SOAP service
 to host, and no Web Connector polling.
 
-**This repository holds documentation, examples, the MCP Registry entry (`server.json`) and the
-Claude Desktop extension bundle (`.mcpb`).** The LedgerCrossing app itself is a commercial Windows
+**This repository holds documentation, examples, the MCP Registry entry (`server.json`) and, in its
+releases, the Claude Desktop extension bundle (`.mcpb`).** The LedgerCrossing app itself is a commercial Windows
 app: a one-time purchase, licensed per machine, with unlimited company files. See
 [ledgercrossing.com](https://ledgercrossing.com) for pricing. Its source is not in this repository, and
 nothing here works without the app installed on the QuickBooks machine.
