@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "quickbooks": {
+      "type": "http",
+      "url": "http://localhost:8284/mcp",
+      "headers": { "X-Api-Key": "YOUR_KEY" }
+    }
+  }
+}

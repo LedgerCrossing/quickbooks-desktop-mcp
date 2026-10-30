@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.ledgercrossing/quickbooks-desktop",
+  "title": "LedgerCrossing for QuickBooks Desktop",
+  "description": "QuickBooks Desktop MCP server: all 240 qbXML operations for Claude, ChatGPT, Cursor and VS Code",
+  "version": "1.15.1",
+  "websiteUrl": "https://ledgercrossing.com/docs/mcp",
+  "repository": {
+    "url": "https://github.com/LedgerCrossing/quickbooks-desktop-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/LedgerCrossing/quickbooks-desktop-mcp/releases/download/v1.15.1/ledgercrossing.mcpb",
+      "version": "1.15.1",
+      "fileSha256": "adc39fbcdbc579e73874e954f0055a3dfc7c7ae443417bf8ce63ef8e89c51b4b",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://{remote_address}/mcp",
+      "variables": {
+        "remote_address": {
+          "description": "The host part of your MCP Server address (without https:// and /mcp), shown in LedgerCrossing under Settings > Allowed Connections > Internet. Requires LedgerCrossing Remote.",
+          "isRequired": true,
+          "placeholder": "copper-heron-7f3.relay.ledgercrossing.com"
+        }
+      }
+    }
+  ]
+}

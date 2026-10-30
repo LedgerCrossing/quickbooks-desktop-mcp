@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "quickbooks": {
+      "command": "C:\\Program Files (x86)\\LedgerCrossing\\LedgerCrossing.exe",
+      "args": ["--mcp-stdio"]
+    }
+  }
+}
