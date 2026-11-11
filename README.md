@@ -49,8 +49,15 @@ Connections** in the app shows the exact address and the API key.
 2. In Claude Desktop open **Settings > Extensions > Advanced settings > Extension Developer >
    Install Extension…** and pick the file. (Windows has no file association for `.mcpb`, so
    double-clicking it won't work.)
-3. Leave the settings at their defaults on the QuickBooks computer. On another office computer, set
-   **LedgerCrossing address** (for example `http://qb-server:8284`) and paste the **API key**.
+3. On the QuickBooks computer, leave the extension's three settings blank and enable it. On another
+   office computer, copy the **MCP Server** address and **API key** from LedgerCrossing's
+   **Settings > Allowed Connections > Local network** into **LedgerCrossing address (optional)** and
+   **API key (optional)**. If HTTPS is on, also paste the fingerprint from **Settings > Advanced**
+   into **TLS fingerprint (optional)**.
+
+If LedgerCrossing.exe is set to **Run this program as an administrator**, extensions older than
+1.15.4 can't connect and Claude shows only "Server disconnected". Install the 1.15.4 or later bundle
+from the latest release.
 
 Prefer a config file? See [`examples/mcp-configs/claude_desktop_config.json`](examples/mcp-configs/claude_desktop_config.json)
 (stdio mode, same machine only).
