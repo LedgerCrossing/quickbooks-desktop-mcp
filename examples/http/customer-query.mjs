@@ -17,5 +17,7 @@ const res = await fetch(`${LC_URL}/api/v1/qbxml`, {
   headers: { "X-Api-Key": LC_KEY, "Content-Type": "application/json" },
   body: JSON.stringify({ qbxml }),
 });
-const result = await res.json();
-console.log(result.success ? result.response : result);
+// Errors carry a JSON body, except a 403 refused at the door, which has none.
+const text = await res.text();
+const result = text ? JSON.parse(text) : {};
+console.log(result.success ? result.response : { status: res.status, ...result });

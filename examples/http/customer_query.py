@@ -26,6 +26,7 @@ try:
     with urllib.request.urlopen(req) as resp:
         result = json.load(resp)
 except urllib.error.HTTPError as e:
-    result = json.load(e)
+    # Errors carry a JSON body, except a 403 refused at the door, which has none.
+    result = {"status": e.code, **json.loads(e.read() or b"{}")}
 
 print(result["response"] if result.get("success") else result)
