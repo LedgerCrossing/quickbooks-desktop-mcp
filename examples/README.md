@@ -6,6 +6,9 @@ machine's name on your office network, or your LedgerCrossing Remote or tunnel a
 Over Remote, the owner must first turn on **Allow the API key** (**Settings > Allowed Connections >
 Internet**), which is off by default.
 
+By default each request names its company file (**QuickBooks File** page: **The caller names the file in each
+request**). Each query script has a commented-out line that sends one; or choose **Always use this company file**.
+
 | File | What it shows |
 |---|---|
 | `http/customer-query.sh` | curl: run a qbXML query |
@@ -23,5 +26,5 @@ Windows blocks PowerShell scripts by default, so run the PowerShell example from
 powershell -ExecutionPolicy Bypass -File .\Customer-Query.ps1
 ```
 
-Queries should be bounded (`MaxReturned`, a date range, or similar). LedgerCrossing refuses
-unbounded queries by default.
+List and transaction queries should be bounded (`MaxReturned`, an iterator, or a specific record).
+Open-ended list and transaction queries are refused by default.

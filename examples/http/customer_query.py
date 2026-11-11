@@ -14,6 +14,9 @@ QBXML = (
     "</QBXMLMsgsRq></QBXML>"
 )
 
+# By default each request names its company file (QuickBooks File page: The caller names the file in each request).
+# To send it, use this data= line instead:
+#   data=json.dumps({"qbxml": QBXML, "company_file": "C:\\Users\\Public\\Documents\\Intuit\\QuickBooks\\Company Files\\MyCompany.qbw"}).encode(),
 req = urllib.request.Request(
     f"{LC_URL}/api/v1/qbxml",
     data=json.dumps({"qbxml": QBXML}).encode(),

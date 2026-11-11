@@ -5,6 +5,8 @@
 LC_URL="${LC_URL:-http://localhost:8284}"
 LC_KEY="${LC_KEY:?Set LC_KEY to the API key from Settings > Allowed Connections}"
 
+# By default each request names its company file (QuickBooks File page: The caller names the file in each request).
+# To send it, add it to the JSON below: "company_file": "C:\\Users\\Public\\Documents\\Intuit\\QuickBooks\\Company Files\\MyCompany.qbw"
 curl -s "$LC_URL/api/v1/qbxml" \
   -H "X-Api-Key: $LC_KEY" \
   -H "Content-Type: application/json" \

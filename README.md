@@ -3,8 +3,8 @@
 <!-- mcp-name: com.ledgercrossing/quickbooks-desktop -->
 
 LedgerCrossing gives QuickBooks Desktop (Pro, Premier, Enterprise) an HTTP/qbXML API and an MCP
-server that your apps and AI agents can reach from anywhere: the same machine, your office
-network, or the internet through [LedgerCrossing Remote](https://ledgercrossing.com/remote).
+server that your apps and AI agents can reach from anywhere: the internet through
+[LedgerCrossing Remote](https://ledgercrossing.com/remote), your office network, or the same machine.
 
 Claude, ChatGPT, Cursor, VS Code and any other MCP client get six tools covering all 240 qbXML
 operations. Your own code gets `POST /api/v1/qbxml`: send qbXML, get qbXML back. No SOAP service
@@ -33,9 +33,9 @@ Pick the path by where the AI runs relative to the QuickBooks computer.
 
 | Client | From | How | Needs |
 |---|---|---|---|
+| claude.ai, ChatGPT, Meta Muse, Grok Bot | anywhere | [LedgerCrossing Remote](https://ledgercrossing.com/docs/connect) ($39/mo) | per-person sign-in (OAuth); Meta Muse needs LedgerCrossing 1.15.1 or later, Grok Bot 1.15.2 or later |
 | Claude Desktop | the QuickBooks computer | [`.mcpb` bundle](#claude-desktop) | nothing to copy |
 | Claude Desktop | another computer in the office | `.mcpb` bundle + address and API key | **Settings > Allowed Connections > Local network** turned on |
-| claude.ai, ChatGPT, Meta Muse | anywhere | [LedgerCrossing Remote](https://ledgercrossing.com/docs/connect) ($39/mo) | per-person sign-in (OAuth); Meta Muse needs LedgerCrossing 1.15.1 or later |
 | Claude Code, Cursor, VS Code | any of the above | [HTTP config](#claude-code-cursor-vs-code) | MCP URL + API key (same machine or office); sign-in over Remote |
 | Codex, Gemini CLI | the QuickBooks computer or the office | [quickstart](https://ledgercrossing.com/docs/mcp#codex-and-gemini-cli) | nothing on the QuickBooks computer (stdio); MCP URL + API key from another computer |
 
@@ -84,8 +84,8 @@ The agent discovers what it needs on demand (`list_operations` → `get_operatio
 
 **Before you connect an agent:** it can write. On the QuickBooks computer and the office network,
 `run_qbxml` can create invoices, payments and edits, with the same power as the HTTP API. Over
-LedgerCrossing Remote, each person starts read-only until the owner allows changes. Unbounded
-queries are refused by default,
+LedgerCrossing Remote, each person starts read-only until the owner allows changes. Open-ended
+list and transaction queries are refused by default,
 and QuickBooks' Audit Trail records every posted transaction. Connect agents you trust, to company
 files you mean them to touch.
 
@@ -112,21 +112,25 @@ before sending it.
 
 ## Reach it from anywhere
 
-- **Same machine:** `http://localhost:8284`.
-- **Office network:** turn on **Settings > Allowed Connections > Local network**; the app requires
-  an API key first and manages its own firewall rule. Free.
 - **Internet:** [LedgerCrossing Remote](https://ledgercrossing.com/remote) ($39/mo), a managed
-  HTTPS relay with per-person sign-in, which claude.ai and ChatGPT require (Meta Muse is verified
-  over it too). Or run your own tunnel
-  with the [free guide](https://ledgercrossing.com/docs/quickbooks-remote-access-cloudflare-tunnel)
-  for clients that can send an API key header.
+  HTTPS relay with per-person sign-in, which claude.ai and ChatGPT require (Meta Muse and Grok Bot
+  are verified over it too). Clients that can send an API key header can also use your own tunnel
+  ([guide](https://ledgercrossing.com/docs/quickbooks-remote-access-cloudflare-tunnel)).
+- **Office network:** turn on **Settings > Allowed Connections > Local network**; the app requires
+  an API key first and manages its own firewall rule.
+- **Same machine:** `http://localhost:8284`.
 
 ## Requirements
 
-- Windows 10 or 11, or Windows Server 2016–2025, with QuickBooks Desktop Pro, Premier or Enterprise.
+- Windows 10 or 11, or Windows Server 2016–2025, with QuickBooks Desktop Pro, Premier or Enterprise,
+  2019 and later. Older versions back to 2014 use the same Intuit connection and should work, though
+  we haven't tested them; the 30-day guarantee covers you.
 - QuickBooks running with the company file open (or auto-openable). That is a QuickBooks Desktop
   constraint.
-- LedgerCrossing installed and activated on that machine (1.15.1 or later for Meta Muse).
+- By default each request names its company file (QuickBooks File page: The caller names the file in
+  each request). Ask your agent to use a file by name, or choose Always use this company file on the same page.
+- LedgerCrossing installed and activated on that machine (1.15.1 or later for Meta Muse, 1.15.2 or
+  later for Grok Bot).
 
 ## Links
 

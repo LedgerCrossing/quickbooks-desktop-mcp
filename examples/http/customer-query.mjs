@@ -9,6 +9,9 @@ const qbxml =
   "<CustomerQueryRq><MaxReturned>10</MaxReturned></CustomerQueryRq>" +
   "</QBXMLMsgsRq></QBXML>";
 
+// By default each request names its company file (QuickBooks File page: The caller names the file in each request).
+// To send it, use this body instead:
+//   body: JSON.stringify({ qbxml, company_file: "C:\\Users\\Public\\Documents\\Intuit\\QuickBooks\\Company Files\\MyCompany.qbw" }),
 const res = await fetch(`${LC_URL}/api/v1/qbxml`, {
   method: "POST",
   headers: { "X-Api-Key": LC_KEY, "Content-Type": "application/json" },
