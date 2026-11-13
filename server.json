@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.ledgercrossing/quickbooks-desktop",
   "title": "LedgerCrossing for QuickBooks Desktop",
-  "description": "QuickBooks Desktop MCP server: all 240 qbXML operations for Claude, ChatGPT, Cursor and VS Code",
-  "version": "1.15.4",
+  "description": "QuickBooks Desktop MCP server: all 240 qbXML operations for Claude, ChatGPT and other AI assistants",
+  "version": "1.16.0",
   "websiteUrl": "https://ledgercrossing.com/docs/mcp",
   "repository": {
     "url": "https://github.com/LedgerCrossing/quickbooks-desktop-mcp",
@@ -12,9 +12,9 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/LedgerCrossing/quickbooks-desktop-mcp/releases/download/v1.15.4/ledgercrossing.mcpb",
-      "version": "1.15.4",
-      "fileSha256": "0dc1f89c7835b0cc6a7c3962699551fe79094f2c7d0fb1c10bd68c736e83663c",
+      "identifier": "https://github.com/LedgerCrossing/quickbooks-desktop-mcp/releases/download/v1.16.0/ledgercrossing.mcpb",
+      "version": "1.16.0",
+      "fileSha256": "d9777f206ecdc048f40e564ea66ad273533ee014584e47836a95451f14a5ad04",
       "transport": {
         "type": "stdio"
       }

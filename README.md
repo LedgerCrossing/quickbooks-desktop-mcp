@@ -6,8 +6,8 @@ LedgerCrossing gives QuickBooks Desktop (Pro, Premier, Enterprise) an HTTP/qbXML
 server that your apps and AI agents can reach from anywhere: the internet through
 [LedgerCrossing Remote](https://ledgercrossing.com/remote), your office network, or the same machine.
 
-Claude, ChatGPT, Cursor, VS Code and any other MCP client get six tools covering all 240 qbXML
-operations. Your own code gets `POST /api/v1/qbxml`: send qbXML, get qbXML back. No SOAP service
+Claude, ChatGPT, Cursor, VS Code and any other MCP client get seven tools covering all 240 qbXML
+operations, with lookups and changes in separate tools. Your own code gets `POST /api/v1/qbxml`: send qbXML, get qbXML back. No SOAP service
 to host, and no Web Connector polling.
 
 **This repository holds documentation, examples, the MCP Registry entry (`server.json`) and, in its
@@ -75,22 +75,27 @@ LedgerCrossing Remote with per-person sign-in, the same way as claude.ai (see
 
 Then ask: *"Which customers are 60+ days overdue?"*
 
-## The six tools
+## The seven tools
 
 | Tool | What it does |
 |---|---|
 | `list_operations` | Lists or searches the 240 qbXML operations, with category and minimum QuickBooks version |
-| `get_operation` | Full field reference for one operation: element order, required fields, max lengths, enums |
+| `get_operation` | Full field reference for one operation (element order, required fields, max lengths, enums), plus a minimal example request |
 | `validate_qbxml` | Checks a request against the catalog without touching QuickBooks |
-| `run_qbxml` | Runs the qbXML in QuickBooks Desktop and returns the response |
+| `read_quickbooks` | Runs a query or report in QuickBooks Desktop and returns the response. Refuses any request that would change data |
+| `write_quickbooks` | Adds, modifies, deletes or voids records in QuickBooks Desktop. Refuses requests that change nothing |
 | `explain_error` | Turns a QuickBooks status code into what went wrong and what to change |
 | `get_status` | Is QuickBooks up, which company file is open, is the bridge connected |
 
 The agent discovers what it needs on demand (`list_operations` → `get_operation` →
-`validate_qbxml` → `run_qbxml`), so the catalog never floods its context.
+`validate_qbxml` → `read_quickbooks` or `write_quickbooks`), so the catalog never floods its context.
+Every tool carries a title and MCP annotations: `write_quickbooks` is the only one marked
+destructive, and the other six are marked read-only. In LedgerCrossing 1.16.0, `read_quickbooks`
+and `write_quickbooks` replaced `run_qbxml`; prompts and agent setups that name `run_qbxml` need the
+new names.
 
 **Before you connect an agent:** it can write. On the QuickBooks computer and the office network,
-`run_qbxml` can create invoices, payments and edits, with the same power as the HTTP API. Over
+`write_quickbooks` can add, change, delete and void records, with the same power as the HTTP API. Over
 LedgerCrossing Remote, each person starts read-only until the owner allows changes. Open-ended
 list and transaction queries are refused by default,
 and QuickBooks' Audit Trail records every posted transaction. Connect agents you trust, to company
