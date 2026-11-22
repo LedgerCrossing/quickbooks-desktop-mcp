@@ -75,6 +75,22 @@ LedgerCrossing Remote with per-person sign-in, the same way as claude.ai (see
 
 Then ask: *"Which customers are 60+ days overdue?"*
 
+### Gemini CLI
+
+On the QuickBooks computer, install the extension:
+
+```
+gemini extensions install https://github.com/LedgerCrossing/quickbooks-desktop-mcp
+```
+
+The extension starts LedgerCrossing in MCP mode (stdio), so there's no key to copy. Run Gemini CLI as
+the same Windows user that runs LedgerCrossing, and trust the folder when Gemini asks: in an
+untrusted folder Gemini CLI turns off every MCP server. Gemini asks before each tool call, so headless
+runs (`gemini -p`) can't use the extension; for those, use the stdio `settings.json` config in the
+[quickstart](https://ledgercrossing.com/docs/mcp#gemini-cli), which sets `"trust": true`. From another
+computer in the office, use the HTTP config there instead. A `ledgercrossing` entry in your Gemini
+`settings.json` takes precedence over the extension's.
+
 ## The seven tools
 
 | Tool | What it does |
