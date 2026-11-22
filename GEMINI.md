@@ -29,6 +29,11 @@ company file open (or auto-openable).
   files, or the company file itself, with shell or file tools: the settings hold keys, and those files
   are not a way into the books.
 - A list or transaction query with no limit is stopped before it reaches QuickBooks. Set one.
+- Ask for the smallest report that answers the question: one total column rather than one per month
+  or week (unless the user asked for the trend), and only the dates asked about. Check the report's
+  column options with `get_operation`. Gemini CLI cuts any tool result over 40,000 characters, and a
+  monthly report can be several times that. If a result is cut anyway, ask QuickBooks again for a
+  smaller report; don't parse the saved output with shell tools or scripts.
 - `write_quickbooks` changes the user's books: adds, changes, deletes and voids. Use it only when the
   user asked for a change, and say what you will change before you call it.
 - If QuickBooks returns a status code, call `explain_error` before you retry.
