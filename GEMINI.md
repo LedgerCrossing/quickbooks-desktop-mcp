@@ -20,8 +20,11 @@ company file open (or auto-openable).
 
 - Find what you need on demand: `list_operations`, then `get_operation`, then `validate_qbxml`, then
   `read_quickbooks` or `write_quickbooks`. Validate every request before you run it.
-- By default each request names its company file. If the user hasn't said which file, ask, or check
-  `get_status`.
+- By default each request names its company file. If the user hasn't said which file, check
+  `get_status`, and if it doesn't show one, ask the user. Don't search the computer for it.
+- Reach QuickBooks only through the ledgercrossing tools. Never open LedgerCrossing's settings or log
+  files, or the company file itself, with shell or file tools: the settings hold keys, and those files
+  are not a way into the books.
 - A list or transaction query with no limit is stopped before it reaches QuickBooks. Set one.
 - `write_quickbooks` changes the user's books: adds, changes, deletes and voids. Use it only when the
   user asked for a change, and say what you will change before you call it.
