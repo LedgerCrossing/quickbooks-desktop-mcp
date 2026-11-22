@@ -19,7 +19,8 @@ company file open (or auto-openable).
 ## How to work
 
 - Find what you need on demand: `list_operations`, then `get_operation`, then `validate_qbxml`, then
-  `read_quickbooks` or `write_quickbooks`. Validate every request before you run it.
+  `read_quickbooks` or `write_quickbooks`. Validate every request before you run it, and send exactly
+  the request that passed.
 - By default each request names its company file. If the user hasn't said which file, check
   `get_status`, and if it doesn't show one, ask the user. Don't search the computer for it.
 - Pass `company_file` as a plain Windows path. A network path starts with two backslashes and has
