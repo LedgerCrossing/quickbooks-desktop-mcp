@@ -21,6 +21,8 @@ company file open (or auto-openable).
 - Find what you need on demand: `list_operations`, then `get_operation`, then `validate_qbxml`, then
   `read_quickbooks` or `write_quickbooks`. Validate every request before you run it, and send exactly
   the request that passed.
+- Start every request with `<?xml version="1.0"?>` then `<?qbxml version="13.0"?>`. The qbXML
+  version is 13.0, not 1.0.
 - By default each request names its company file. If the user hasn't said which file, check
   `get_status`, and if it doesn't show one, ask the user. Don't search the computer for it.
 - Pass `company_file` as a plain Windows path. A network path starts with two backslashes and has
@@ -30,11 +32,14 @@ company file open (or auto-openable).
   files, or the company file itself, with shell or file tools: the settings hold keys, and those files
   are not a way into the books.
 - A list or transaction query with no limit is stopped before it reaches QuickBooks. Set one.
+- To filter by a customer that has jobs, use `FullNameWithChildren`, not `FullName`: sales are usually
+  recorded on the jobs, so `FullName` on the parent customer can return nothing.
 - Ask for the smallest report that answers the question: one total column rather than one per month
   or week (unless the user asked for the trend), and only the dates asked about. Check the report's
-  column options with `get_operation`. Gemini CLI cuts any tool result over 40,000 characters, and a
-  monthly report can be several times that. If a result is cut anyway, ask QuickBooks again for a
-  smaller report; don't parse the saved output with shell tools or scripts.
+  column options with `get_operation`. To compare two years, run one total-only report per year
+  rather than one report with a column per year. Gemini CLI cuts any tool result over 40,000
+  characters, and a monthly report can be several times that. If a result is cut anyway, ask
+  QuickBooks again for a smaller report; don't parse the saved output with shell tools or scripts.
 - `write_quickbooks` changes the user's books: adds, changes, deletes and voids. Use it only when the
   user asked for a change, and say what you will change before you call it.
 - If QuickBooks returns a status code, call `explain_error` before you retry.
