@@ -34,6 +34,11 @@ company file open (or auto-openable).
 - A list or transaction query with no limit is stopped before it reaches QuickBooks. Set one.
 - To filter by a customer that has jobs, use `FullNameWithChildren`, not `FullName`: sales are usually
   recorded on the jobs, so `FullName` on the parent customer can return nothing.
+- Most standard reports are a report type inside one of two operations: `GeneralSummaryReportQuery`
+  (for example ProfitAndLossStandard, SalesByCustomerSummary, ExpenseByVendorSummary) and
+  `GeneralDetailReportQuery` (for example ExpenseByVendorDetail). Searching `list_operations` for a
+  report's name, such as "vendor", finds nothing. Open those two with `get_operation` and pick the
+  report type there.
 - Ask for the smallest report that answers the question: one total column rather than one per month
   or week (unless the user asked for the trend), and only the dates asked about. Check the report's
   column options with `get_operation`. To compare two years, run one total-only report per year
